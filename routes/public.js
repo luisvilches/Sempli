@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const sempli = require('../sempli')
+const router = sempli.router();
 const controller = require('.././controllers');
 const auth = require('../sempli/controllers/auth')
 
@@ -8,8 +8,6 @@ const auth = require('../sempli/controllers/auth')
 
 router.get('/', controller.main.index)
 router.post('/login', auth.auth)
-
-router.post('/test',controller.main.test)
 
 //users
 

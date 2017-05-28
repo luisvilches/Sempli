@@ -8,6 +8,7 @@ const moment = require('moment');
 const auth = require('./middlewares/auth');
 const config = require('../config');
 const formidable = require('express-formidable');
+const mongooseFieldEncryption = require('mongoose-field-encryption').fieldEncryption;
 
 
 
@@ -105,6 +106,19 @@ var sempli = {
     },
     response: function(res,s,obj){
         return res.status(s).json(obj);
+    },
+    encript: function(schema,arr){
+        return schema.plugin(mongooseFieldEncryption, {fields: arr, secret: config.TOKEN_SECRET});
+    },
+    decripter: function(encrypted){
+        return mongooseFieldEncryption.decrypt(encrypted,config.TOKEN_SECRET); // decrypted = 'some text'
+    },
+    schema: mongoose.Schema,
+    models: function(name,model){
+        return mongoose.model(name,model);
+    },
+    router: function(){
+        return express.Router();
     }
 }
 

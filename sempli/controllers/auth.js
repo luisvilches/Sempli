@@ -4,15 +4,15 @@ const User = require('../../models/user')
 
 exports.auth =  (req, res) => {
  //find the user
- User.findOne({mail: req.body.mail},(err, user) => {
+ User.findOne({mail: req.fields.mail},(err, user) => {
     if (err) throw err;
 
     if (!user) {
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
+        res.json({ success: false, message: 'Autenticacion fallida, el usuario no existe' });
     } else if (user) {
 
         // check if password matches
-        if (user.password != req.body.password) {
+        if (user.password != req.fields.password) {
 
             res.json({ success: false, message: 'Authentication failed. Wrong password.' });
 
