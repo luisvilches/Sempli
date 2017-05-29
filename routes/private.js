@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('.././controllers');
 
-
+module.exports = router;
 /////////////// Routes privates /////////////////////////////
 
 router.get('/users', controller.users.users)
@@ -12,4 +12,3 @@ router.post('/user/findone', controller.users.one)
 router.delete('/user/:id', controller.users.delete)
 router.put('/user/update/:id',controller.users.update)
 
-module.exports = router;
